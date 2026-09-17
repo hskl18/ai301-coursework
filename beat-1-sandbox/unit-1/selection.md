@@ -90,31 +90,25 @@ Per-issue: each was filed by `Aburke225` (COLLABORATOR) and carries four labels 
 
 **Run history**
 
-One run: 20/20. I wrote the rubric out in full before grading anything, then ran
-the whole eval set once with `--save-run`. The committed `eval-run.txt` ends with
-`agreement: 20/20 scored items  (bar: 18/20: PASS)` over
-`categories: claimed 4/4  clear-accept 8/8  dead-repo 3/3  policy 1/1  scope 4/4`.
+One run: 20/20.
+I wrote the rubric out in full before grading anything, then ran the whole eval set once with `--save-run`.
+The committed `eval-run.txt` ends with `agreement: 20/20 scored items  (bar: 18/20: PASS)` over `categories: claimed 4/4  clear-accept 8/8  dead-repo 3/3  policy 1/1  scope 4/4`.
 No `--only` re-grades followed, because there were no disagreements to chase.
 
 **Issue analysis**
 
 `issue-20` (excalidraw/excalidraw#11811, "Add company logo shape to the toolbar").
-My rubric decided **reject**; the gold label is **reject**. Nine of my ten checks
-passed it. The repo is plainly alive (`all 5 default-branch commits dated
-2026-08-04, authored by humans (dwelle, yanrin13, nihaarsirikonda)`), nothing is
-claimed, and even `one-bounded-task` passed on `single new toolbar shape
-(place/resize/move/export), with custom-upload/branding explicitly deferred out
-of v1`. The single fail was `maintainer-triaged`: `opened by cursor[bot] (NONE);
-labels: none; 0 comments so no maintainer endorsement`. Every required check
-gates the verdict, so that one fail decided it. That is the read I wanted: a
-well-written feature wish that nobody with repo rights has agreed to is a product
-decision waiting to happen, not a first issue, and the tidiness of the body does
-not change that.
+My rubric decided **reject**, and the gold label is **reject**.
+Nine of my ten checks passed it.
+The repo is plainly alive (`all 5 default-branch commits dated 2026-08-04, authored by humans (dwelle, yanrin13, nihaarsirikonda)`), nothing is claimed, and even `one-bounded-task` passed on `single new toolbar shape (place/resize/move/export), with custom-upload/branding explicitly deferred out of v1`.
+The one fail was `maintainer-triaged`: `opened by cursor[bot] (NONE); labels: none; 0 comments so no maintainer endorsement`.
+Every required check gates the verdict, so that single fail decided it.
+That is the read I wanted.
+A well-written feature wish that nobody with repo rights has agreed to is a product decision waiting to happen, not a first issue, and the tidiness of the body does not change that.
 
 **Check rationale**
 
-`maintainer-triaged` (required), quoted as it currently stands in
-`tools/issue-select/rubric.md`:
+`maintainer-triaged` (required), quoted as it currently stands in `tools/issue-select/rubric.md`:
 
 > Pass if any one holds: the issue was filed by someone with repo rights
 > (`OWNER`, `MEMBER`, `COLLABORATOR`); or it carries at least one label
@@ -126,31 +120,22 @@ not change that.
 > maintainer has replied. An untriaged outside request is a proposal
 > awaiting a product decision, not work anyone has agreed to.
 
-It stands as three cheap proxies for one expensive question — has anyone who can
-merge this agreed it should exist? — because none of the other nine checks ask
-it. The liveness, scope, and claim checks all quietly assume the work is wanted.
-I made it an OR of three signals rather than one rule because repos triage
-differently: some label everything and comment on nothing, others have
-maintainers file their own bugs and never label them. Requiring all three would
-sink maintainer-filed issues that carry no labels; keeping only the label clause
-would sink `issue-16`, where the label exists but the author association is the
-stronger signal.
+It stands as three cheap proxies for one expensive question: has anyone who can merge this agreed it should exist?
+None of the other nine checks ask that.
+The liveness, scope, and claim checks all quietly assume the work is wanted.
+I made it an OR of three signals rather than one rule because repos triage differently.
+Some label everything and comment on nothing, others have maintainers file their own bugs and never label them.
+Requiring all three would sink maintainer-filed issues that carry no labels, and keeping only the label clause would sink `issue-16`, where the label exists but the author association is the stronger signal.
 
 **Trade-offs**
 
-It buys the `issue-20` verdict and pays with false rejects on good untriaged bug
-reports from outsiders. `issue-02` is the visible instance in my run: a clean,
-reproducible BSD-`sed` bug where `one-bounded-task` and `newcomer-sized` both
-passed (`body names the exact sed line to fix and gives the portable
-replacement`), while `maintainer-triaged` failed on `author sermelipharo is NONE,
-labels: none, both commenters are NONE association`. There it changed nothing,
-because `maintainer-active` and `repo-in-use` had already sunk the issue — a dead
-repo triages nothing. In a living repo the same shape, a good outsider bug report
-filed yesterday before a maintainer got to it, would be rejected, and I accept
-that: I would rather wait a week for a label than write a patch nobody asked for.
-The proxy runs the other way too — one stale label passes the check with no human
-judgment behind it — and that is the clause I would tighten first if a live
-candidate ever slipped through on it.
+It buys the `issue-20` verdict and pays with false rejects on good untriaged bug reports from outsiders.
+`issue-02` is the visible instance in my run: a clean, reproducible BSD-`sed` bug where `one-bounded-task` and `newcomer-sized` both passed (`body names the exact sed line to fix and gives the portable replacement`), while `maintainer-triaged` failed on `author sermelipharo is NONE, labels: none, both commenters are NONE association`.
+There it changed nothing, because `maintainer-active` and `repo-in-use` had already sunk the issue.
+A dead repo triages nothing.
+In a living repo the same shape, a good outsider bug report filed yesterday before a maintainer got to it, would be rejected, and I accept that.
+I would rather wait a week for a label than write a patch nobody asked for.
+The proxy also runs the other way, since one stale label passes the check with no human judgment behind it, and that is the clause I would tighten first if a live candidate ever slipped through on it.
 
 ---
 
@@ -158,25 +143,24 @@ candidate ever slipped through on it.
 
 **Selection rationale**
 
-1. **Fit and time.** #72 is Python, one fail-closed guard in `core/security.py`,
-   and the issue itself estimates 1-2 hours — which matches the few evening hours
-   I have. It also sits on an auth path, which is the kind of small, checkable
-   correctness fix I would rather practice on than a UI feature.
-2. **What the verdict caught, and what I weighed on top.** The rubric confirmed
-   the mechanical things: repo alive (human commit the same day), no assignee, no
-   PRs in the repo at all, four labels including `good first issue` from a
-   COLLABORATOR, and no AI policy to trip over. What it cannot see is that #72
-   comes with a `strict=True` xfail at `tests/unit/test_security.py:218` already
-   asserting the behaviour, so the fix has a binary pass signal instead of my own
-   judgment about whether it is done. #73 was the close second and I passed on it
-   because it has no test behind it and leaves a judgment call about which file is
-   canonical; #69 is the same shape as #72 but 2-4 hours over a larger surface.
-3. **Claiming.** Low friction and one real risk. Nothing blocks the claim: 0
-   comments, 0 assignees, and the Path Review house rule means classmates' claims
-   would not block me anyway. The risk is that #72 is a tier-1 `good first issue`
-   in a classroom repo, so several of us may land on it; that costs nothing for
-   credit, but I should expect a shared thread and write a claim comment that says
-   specifically what I plan to change rather than "taking this".
+1. Fit and time.
+   #72 is Python, and the change is one fail-closed guard in `core/security.py`.
+   That is the shape of work I said I prefer: a bounded bug fix that arrives with its acceptance criteria already written down.
+   The issue estimates 1-2 hours and I have a few hours across an evening or two, so there is room left over for the PR description and for following up on review comments, which is the part I actually want the practice in.
+   I also wanted a change on a code path where being wrong is obvious, rather than a UI change I would end up arguing about.
+
+2. What the verdict identified, and what I weighed on top.
+   The verdict got the mechanical parts right, and those are the parts I would have skimmed.
+   It confirmed that the repo is alive (a human commit the same day), that there is no assignee, that the repo has no pull requests at all, that four labels including `good first issue` were applied by a COLLABORATOR, and that there is no AI policy to work around.
+   What it cannot see is that #72 already has a `strict=True` xfail at `tests/unit/test_security.py:218` asserting the behaviour I need to produce, so I get a binary signal for when the fix is done instead of relying on my own judgment.
+   I weighed that against #73, which is plain markdown and just as small but has no test behind it and leaves me deciding which of the two files is canonical, and against #69, which is the same shape as #72 but 2-4 hours across a larger surface.
+   I took the one with the tightest definition of done.
+
+3. Anticipated difficulty in claiming.
+   Claiming itself looks easy: no assignee, no comments, and the Path Review house rule says a classmate's claim would not block me anyway.
+   What I expect is company, since #72 is a tier-1 `good first issue` in a classroom repo and other people will pick it too.
+   That costs me nothing for credit, but it does mean my claim comment should name the file I am touching and the fix I intend, so the thread stays readable if several of us are working in it.
+   I am leaving that comment for Unit 2, where the voice guide comes first.
 
 ---
 
