@@ -8,9 +8,8 @@ format criteria grade exactly that. Your course repo link is the whole submissio
 files and no evidence uploads are part of Assignment 5.
 
 **Contribution Number:** [1]
-**Student:** [Student name]
-**GitHub Username:** [your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comments upstream are identified by this name.]
+**Student:** Hanbin Tan
+**GitHub Username:** hskl18
 **Issue:** [GitHub issue link]
 **Pull Request:** [GitHub PR link, once opened]
 
@@ -55,10 +54,12 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Building the scout, running its first scan, and patching the rubric**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+2026-10-14: I upgraded my Unit 1 issue selector to issue-scout and ran a full scan: four GitHub searches returned 400 results, ranking narrowed them to 139 repositories, and I graded the top five against my ten-check rubric.
+The scan accepted an automated fixture and treated a terse report as unbounded, so I clarified repository-purpose, human-triage and task-boundary rules.
+I then graded three issues shown on the course Issue Selection site, kept two Altinn interface issues as candidates and rejected a browser-title change because an open pull request already covers it.
+After two 19/20 full regressions, I clarified that several proposed fixes or variants of one behavior do not make an umbrella, checked genuine umbrella cases, and confirmed 20/20 with the unchanged Unit 1 harness.
 
 **Unit 6: [one line on the tool work]**
 
