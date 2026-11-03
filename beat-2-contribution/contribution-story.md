@@ -56,74 +56,75 @@ one in the week it belongs to.
 
 **Unit 5: Building the scout, running its first scan, and patching the rubric**
 
-2026-10-14: I upgraded my Unit 1 issue selector to issue-scout and ran a full scan: four GitHub searches returned 400 results, ranking narrowed them to 139 repositories, and I graded the top five against my ten-check rubric.
-The scan accepted an automated fixture and treated a terse report as unbounded, so I clarified repository-purpose, human-triage and task-boundary rules.
-I then graded three issues shown on the course Issue Selection site, kept two Altinn interface issues as candidates and rejected a browser-title change because an open pull request already covers it.
-After two 19/20 full regressions, I clarified that several proposed fixes or variants of one behavior do not make an umbrella, checked genuine umbrella cases, and confirmed 20/20 with the unchanged Unit 1 harness.
+2026-10-14: I used issue-scout to search GitHub, narrow 400 results to 139 repositories and grade the top five with my ten-check rubric.
+It accepted an automated fixture and rejected a short report as too broad, so I tightened the repository and task-boundary rules.
+I also checked three course-site issues, kept two Altinn candidates and dropped a browser-title change that already had a PR.
+After two 19/20 runs, I clarified that several possible fixes for one behavior do not make an umbrella issue; the next full run reached 20/20 with the same harness.
 
 **Unit 6: One canonical voice guide, a posting guard, and scoped repository memory**
 
-2026-10-21: With Codex assistance, I installed the staff voice guard, merged my Unit 2-4 rules into one canonical guide with claim/question/ping rules, and connected the three live skills to it.
-In a fresh Claude Code session, the hook blocked a real `gh issue comment --help` tool call before it ran, and the guard's Sonnet voice pass returned pass on both the first and the revised version of my claim draft.
-I replaced the scout's strict scope check with scope-feasible and separated difficulty from acceptance; I also clarified repro-check's old no-date wording so a report-back window is allowed without promising a fix deadline.
-Codex prepared locally excluded CLAUDE.local.md notes and ran the 9/9 AppContext baseline; during posting, a relative --body-file path failed the guard, so Claude used an absolute path and the checked claim posted once.
+2026-10-21: With Codex, I installed the voice guard and put my Unit 2-4 rules, plus claim/question/ping rules, in one guide used by the three live skills.
+The hook stopped a real `gh issue comment --help` call, and Sonnet passed both versions of the claim draft.
+I changed the scout to scope-feasible and kept difficulty separate from acceptance; I also allowed a report-back window in repro-check without promising a fix date.
+Codex saved local repo notes and ran the 9/9 AppContext baseline, but the posting guard could not resolve a relative --body-file path, so Claude switched to an absolute path and posted the claim once.
 
 **Unit 7: Ship-gate manifest from the frontend CI, a real gate PASS, and a voice-guard stop on the PR**
 
-2026-10-28: With Claude Code, I wrote ship-manifest.md for Altinn/altinn-studio with four checks from the Designer frontend CI workflow and CONTRIBUTING.md (Vitest, typecheck, ESLint with Prettier, and yarn spell:quick), and both hooks stopped the `gh pr create --help` wiring test.
-On main, typecheck failed only on my untracked reproduction test and three schema suites failed until my sparse checkout got its testdata folder, so I fixed the setup and kept the exclusion table empty.
-On my branch the gate passed all four checks and all six pr-precheck checks, and I added the one line it asked for, that hosted CI had not run.
-When the PR opened, the voice guard stopped the body's emoji attribution line, so it was removed and the hook ran the gate again, which passed.
+2026-10-28: With Claude Code, I put the frontend tests, typecheck, lint with Prettier and spell:quick in ship-manifest.md; both hooks stopped the `gh pr create --help` wiring test.
+The baseline checks caught missing testdata in my sparse checkout and an unused import in my reproduction test, so those setup problems had to be handled first.
+The gate passed all four project checks and all six pr-precheck checks, but the voice guard then stopped the emoji attribution line in the PR body.
+I had the emoji removed and the gate ran again before the PR opened; afterward I had the ship-gate hook removed, keeping the gate files and manifest.
 
 **Unit 8: A live PR-monitor run and a draft corrected before publication**
 
-2026-10-28: With Codex, I installed the staff PR-monitor unchanged and used a playbook based on my voice guide; after the default configuration stopped as not logged in, the selected existing Claude configuration completed one Sonnet 5.5 drafting call.
-Both the free --state and the full run read PR #21606 as FEEDBACK-IN for CodeRabbit's round, MERGEABLE/BLOCKED with no human decision, and the monitor wrote a review-response draft.
-The draft proposed clearing the URL in generic handleDiscard, treated the deletion-path fixes as unrelated and made unverified working-tree claims; the monitor's 3 passing summary also omitted the approval-blocked Actions workflows.
-Codex kept that draft unpublished, prepared a separate correction that clears the URL only after successful deletion, and retained the 14-day minimum before considering a nudge; on November 3 I approved the replies that went out after the fixes were pushed as beee7db6.
+2026-10-28: With Codex, I installed the PR-monitor and a playbook based on my voice guide; switching to an existing logged-in Claude configuration got the Sonnet 5.5 run working.
+The free --state check and full run found CodeRabbit feedback on PR #21606, MERGEABLE/BLOCKED status and no human review decision, then the monitor drafted a reply.
+The draft picked the wrong discard path, dismissed the local deletion fix as unrelated and made unverified local-state claims; its 3 passing summary also missed workflows waiting for approval.
+Codex kept that draft local and prepared a correction, with a 14-day minimum before considering a nudge; on November 3 I approved the replies posted after the fixes reached beee7db6.
 
 ---
 
 ## Why I Chose This Issue
 
-I selected [Altinn/altinn-studio#10955](https://github.com/Altinn/altinn-studio/issues/10955), which asks the form editor to preserve the selected component after a page refresh by storing its identity in the URL.
-It came from the Issue Selection site's candidates I recorded in Unit 5, rather than being one of the first public scan's top five.
-My Unit 5 scout accepted it; its only thread comment names prerequisite PR #15947, and a fresh check confirmed that PR merged on October 27, 2025.
-On October 21, the issue remained open and unassigned, the complete thread contained no claim, and no open PR explicitly referenced #10955 among the 142 open PRs inspected.
-I switched from my course-site reservation of #12123 because that issue still has a 2024 claim and maintainer permission; my scout's twelve-month expiry rule accepted it, but Unit 6's stricter claim rule says to choose another issue.
-On October 21, I released the #12123 reservation and claimed #10955 on the course Issue Selection site.
-My screenshot shows the release banner, the matching #10955 title under Your issues (1), and an Unclaim button; this confirms the course-site reservation, not a GitHub claim comment or maintainer assignment.
+I chose [Altinn/altinn-studio#10955](https://github.com/Altinn/altinn-studio/issues/10955) because it is a concrete UI problem: select a component, refresh the page, and the selection disappears.
+It fits my React/TypeScript experience and gives me a reason to understand how URL state and React state work together.
+I found it through the course Issue Selection site and graded it with my scout in Unit 5.
+The thread named blocker PR #15947, but that PR had merged on October 27, 2025.
+On October 21, the issue was open and unassigned, with no claim in the thread or referencing PR among the 142 open PRs checked.
 
-This fits my React/TypeScript experience.
-I hope to learn how to separate in-memory UI state from URL state, how to keep neighboring routing behavior intact and how to write evidence a maintainer can review.
-At the checked-out commit, Studio routes frontend major versions 9+ to ux-editor, 4 through 8 to ux-editor-v4 and earlier versions to ux-editor-v3; the first two keep component selection in local React state, so I raised the editor-version scope with the maintainers first; with no answer by October 28, I built only ux-editor and said so in the PR.
-On October 21, my Unit 6 scout re-grade, run directly in Claude Code with the scope-feasible rubric, accepted both #10955 and #12123.
-Its difficulty note rates #10955 ambitious: the issue is marked for consideration, ready-for-dev was removed on September 25, 2026, and the editor-version scope is open, so my claim has to raise that question first.
-It rated #12123 straightforward and ranked it higher on fit, but that accept still rests on the stale-claim allowance described above.
-My scout helped find a coherent candidate, but its old availability rule and the course-site reservation were not sufficient evidence that #12123 was available under this week's rules.
-I applied the course scope-feasible patch and recorded the replaced check in scan-notes.md; the final Unit 5 20/20 run belongs to the earlier rubric, not this patched version.
-Codex and Claude Code drafted the text of this story from my records, including this section, Understanding the Issue, the weekly Toolkit entries and Learnings and Reflections, and I chose to submit that text without rewriting it myself.
-Codex also prepared the source investigation and local baseline; I reviewed the final claim wording myself before it was posted.
+My first course-site pick was #12123.
+The scout ranked it higher, but it still had a 2024 claim and maintainer permission, so I switched to #10955 under Unit 6's stricter rule.
+I released the old reservation and reserved #10955 on October 21; the screenshot records that course-site choice, while the GitHub comment below records the actual claim.
+The Unit 6 scope-feasible re-grade accepted both issues, rating #10955 ambitious and #12123 straightforward.
+I recorded that rubric change in scan-notes.md; the earlier 20/20 belongs to the Unit 5 version.
+
+The scope was still uncertain.
+Studio uses ux-editor for v9+ apps, ux-editor-v4 for versions 4-8 and ux-editor-v3 for older apps, with local selection state in the first two.
+The issue was marked for consideration, and ready-for-dev had been removed on September 25, 2026.
+I asked which editor the maintainers wanted covered; with no answer by October 28, I built the ux-editor candidate and kept that limit in the PR.
+
+I used Codex and Claude Code to investigate the issue, build and check the changes, and draft this story from my records.
+Codex prepared the first source investigation and baseline tests; I reviewed the final claim wording before it went out.
 
 Claim comment: https://github.com/Altinn/altinn-studio/issues/10955#issuecomment-6330240501 (posted 2026-10-21 18:12 PDT).
-The prepared draft asks about the editor-version scope, names the first reproduction check, gives a one-week report-back window and discloses Codex assistance.
-On October 21, a claim-only repro-check accepted the first draft: claim-specific and repo-conventions passed, and the five checks that need a reproduction report were excluded.
-The voice guard's manual Sonnet check of that first draft returned pass with exit 0.
-Codex then revised the editor names and report-back wording and asked which editor package, if any, the maintainer would welcome work on.
-Later on October 21, a claim-only repro-check of the revised draft also accepted it with the same two checks passing, and the voice guard's Sonnet check of the revised draft returned pass with exit 0.
-Just before posting, the thread was still open and unassigned, with no new comments, events or referencing pull requests.
-I posted the revised draft once through Claude Code with the voice guard active; the guard first stopped the command because it resolved a relative --body-file path against the session directory, and the same draft passed and posted once with an absolute path.
-GitHub stored the comment byte-identical to the checked draft.
+It asks about the editor scope, names the first check, promises a report within a week and discloses Codex assistance.
+Both draft versions passed claim-only repro-check and the guard's Sonnet check on October 21.
+Only claim-specific and repo-conventions counted at that point; the other five checks needed a reproduction report.
+Codex clarified the editor names and included the possibility that I could not reproduce it.
+The final thread check found no new claim or PR.
+During posting, the guard stopped the relative --body-file path, so Claude used an absolute path and posted the same text once.
+GitHub's stored text matched the checked draft byte for byte.
 As of November 3, no maintainer has replied or assigned the issue.
-On October 28, I posted my one-week report of findings that day through Claude Code with the voice guard active: https://github.com/Altinn/altinn-studio/issues/10955#issuecomment-6485588852.
-It reports the remount result on main c298f416, says I had not checked a real browser reload or the older editors, and says I would open a PR for ux-editor (v9+) only unless the maintainers prefer another package.
+On October 28, I posted the report-back through Claude Code and the guard: https://github.com/Altinn/altinn-studio/issues/10955#issuecomment-6485588852.
+It gives the remount result on main c298f416, names the untested browser and older editors, and proposes the v9+ PR unless the maintainers prefer another package.
 
 **Toolkit**
 
-- Tool: issue-scout, re-run directly in Claude Code on October 21 with the Unit 6 scope-feasible rubric after the Unit 5 direct read-out.
-- What it produced: Unit 5 accepted #10955 and #12123 and rejected #14892 for existing work; the Unit 6 re-grade accepted #10955 (ambitious) and #12123 (straightforward), and current thread/PR checks support preparing #10955 instead of claiming over #12123's old contributor.
-- Difficulties: a course-site reservation is not a GitHub claim, the scout's stale-claim allowance is looser than Unit 6's rule, and the editor-version scope across ux-editor, ux-editor-v4 and ux-editor-v3 is not settled by a newcomer label.
-- What changed: replaced one-bounded-task with scope-feasible, added live-only difficulty notes, switched the selected issue to #10955 with my explicit confirmation, and left the maintainer question visible instead of silently guessing scope.
+- Tool: I used issue-scout in Unit 5, then Claude Code reran it on October 21 with scope-feasible.
+- What it produced: #10955 and #12123 passed, while #14892 already had work covering it.
+  The re-grade called #10955 ambitious and #12123 straightforward.
+- Difficulties: the scout allowed an old claim that Unit 6 did not allow, and a course reservation did not settle GitHub availability or editor scope.
+- What changed: I replaced one-bounded-task with scope-feasible, added live difficulty notes and confirmed the switch to #10955, with the scope question left open for the maintainer.
 
 ---
 
@@ -131,40 +132,44 @@ It reports the remount result on main c298f416, says I had not checked a real br
 
 **Problem Description**
 
-The report asks the forms editor to keep the same component selected after refreshing the page.
-This is a selection-persistence behavior, not a request to change component IDs, saved layout content or data submission.
+The issue is easy to describe: I select a component in the form editor, but refreshing the page loses that selection.
+The requested change keeps track of the selected component without changing its ID, saved layout or submitted data.
 
 **Expected Behavior**
 
-Selecting a component should place enough identity in the URL for the same component to be selected when that URL reloads.
-Existing page/layout selection should continue to work.
+The URL should remember the component I selected.
+Opening that URL again should select the same component, with the page, tree highlight and properties panel agreeing.
+The existing layout parameter should keep working.
 
 **Current Behavior**
 
-The GitHub report says selection is lost on refresh.
-Current source at 0a62afac023248918e345457044a72c6deda8052 reads a layout query parameter and initializes a Page selection; later component selections are kept in local React state.
-An authorized local test now confirms that the ux-editor provider changes selectedItem from component Input to page Side1 after a fresh mount at the captured URL.
-On October 28 the selection files were unchanged on main c298f416ecc5dd1bceaccbd6be18cc42f9ad17d6, and the same test still failed the same way.
-The editor also keeps a second copy of the selection in FormItemContext, which the tree highlight and the properties panel read, and that copy is not restored either.
-This is a provider/remount result, not a full browser refresh or a verification of every editor version.
+Before the fix, AppContext read the page from layout in the URL but kept later component selections in React state.
+Codex tested this on 0a62afac023248918e345457044a72c6deda8052 by selecting Input and remounting the real provider at the captured URL.
+The page came back as Side1, but the selected item became that page instead of Input.
+The same test still failed on October 28 at main c298f416ecc5dd1bceaccbd6be18cc42f9ad17d6, where the selection files were unchanged.
+
+There was also a second copy to handle.
+FormItemContext held the edited item used by the tree and properties panel, so restoring AppContext alone would not be enough.
+The remount test confirmed the provider failure; it did not check a real browser refresh, the full editor route or the other editor versions.
 
 **Affected Components**
 
-- src/Designer/frontend/packages/ux-editor/src/AppContext.tsx: URL-derived page initialization and local selectedItem state.
-- src/Designer/frontend/packages/ux-editor/src/containers/DesignView/FormTree/FormTree.tsx: sets both selection copies and highlights formItemId.
-- src/Designer/frontend/packages/ux-editor/src/containers/FormItemContext.tsx: holds the edited component (formItemId and formItem) and discards it on mount and on every page change.
-- src/Designer/frontend/packages/ux-editor/src/components/Properties/ComponentConfigPanel/ComponentConfigPanel.tsx: clears selectedItem during render when formItem is missing.
-- src/Designer/frontend/packages/ux-editor/src/AppContext.test.tsx: existing baseline tests for provider selection behavior.
-- src/Designer/frontend/packages/ux-editor/src/AppContext.selectionPersistence.repro.test.tsx: the local remount reproduction, never committed and removed from the checkout after its after-fix run; its complete source is included below.
-- ux-editor-v4 has similar state; UiEditor.tsx chooses between the three editor packages by frontend version, so the target package needs scope confirmation.
+- `ux-editor/src/AppContext.tsx`: holds selectedItem and reads the URL.
+- `ux-editor/src/containers/DesignView/FormTree/FormTree.tsx`: updates both selection copies and highlights formItemId.
+- `ux-editor/src/containers/FormItemContext.tsx`: holds the edited item and handles discard on mount/page changes.
+- `ux-editor/src/components/Properties/ComponentConfigPanel/ComponentConfigPanel.tsx`: clears selectedItem during render when it has no edited item.
+- `ux-editor/src/AppContext.test.tsx`: covers provider selection; the separate local remount test is included below and was removed after its after-fix run without being committed.
+- `UiEditor.tsx`: chooses ux-editor, ux-editor-v4 or ux-editor-v3 by frontend version; v4 has a similar state problem, but remains outside this fix.
+
+The ux-editor paths above are under src/Designer/frontend/packages/.
 
 **Toolkit**
 
-- Tool: scoped source orientation with Codex, the issue thread, applicable AGENTS.md files and CONTRIBUTING.md.
-- What it produced: the three active-editor entry points above and a short CLAUDE.local.md importing the repository's own root guidance.
-- Difficulties: a React state setter alone does not prove the actual browser-refresh outcome, and the issue predates the current editor-version split.
-- What changed: separated the source hypothesis from runtime evidence and made the version choice an explicit question in the claim draft.
-  On October 28, Claude Code rechecked this against main c298f416 and the rewritten CONTRIBUTING.md and PR template, and added FormItemContext and ComponentConfigPanel once tracing showed that the tree and properties panel read a second copy of the selection.
+- Tool: I used Codex to trace the source, read the thread and check the repo's AGENTS.md and CONTRIBUTING.md.
+- What it produced: the three editor entry points and local repo notes, followed by the two-copy selection flow above.
+- Difficulties: reading a state setter did not prove a browser outcome, and the old issue did not specify today's editor-version split.
+- What changed: I asked about the editor scope and kept source reasoning separate from the remount result.
+  Claude Code rechecked main c298f416 and the updated repo rules on October 28, adding FormItemContext and ComponentConfigPanel to the explanation.
 
 ---
 
@@ -331,11 +336,13 @@ function renderAppContextForReproduction(url: string) {
 
 **Toolkit**
 
-- Tool: Codex with the real React provider/router, existing synthetic fixtures, Vitest, focused ESLint and Prettier; then Claude Code ran repro-check on the published claim and the full report together.
-- What it produced: an auditable local remount failure (component Input becomes page Side1), nine passing controls and the full test source/output with no new dependency, and a full-package repro-check accept.
-- Difficulties: the original green suite did not exercise remounting, the first test draft hit a lint naming rule, the provider-level result is narrower than a browser refresh, and the review found one copied stdout line missing its leading space.
-- What changed: added one local reproduction test, corrected only its render-result naming, retained the failure and documented the exact scope and command; Claude Code restored the copied output line exactly and removed a stale pending note.
-  At that Unit 6 checkpoint the business fix was still pending; the later implementation and review follow-up are recorded below.
+- Tool: Codex wrote and ran the real-provider/router test with existing fixtures, then checked lint and formatting; Claude Code ran repro-check on the claim and report together.
+- What it produced: Input became page Side1 after remount, while all nine existing controls passed.
+  The report includes the full test and output, and the full-package check accepted it.
+- Difficulties: the green baseline had no remount case, the first test hit a naming rule, and one copied stdout line lost its leading space.
+  The result still covered less than a browser refresh.
+- What changed: Codex fixed the test naming and kept the failing assertion; Claude restored the exact output and removed an outdated pending note.
+  This was the Unit 6 reproduction, before the implementation below.
 
 ---
 
@@ -446,10 +453,12 @@ Review follow-up, November 3, published as beee7db6:
 
 **Toolkit**
 
-- Tool: my installed plan-check, run on October 28 by Claude Code in the same session that drafted plan.md and plan-comment.md, against the live #10955 thread.
-- What it produced: run 1 rejected the package (six checks passed; thread-and-conventions failed because the comment ignored the thread's "Blocked by #15947" note), and runs 2 to 4 accepted with all seven required checks passing.
-- Difficulties: the skill still expects a posted Unit 2 reproduction report and a plan comment that will be posted, while Units 6 and 7 keep both local, and its rubric still mentions Path Review house rules; the session that wrote the drafts also graded them, so the accept is not independent.
-- What changed: the drafts now say #15947 merged, name the adjacent draft PR #21442, the typecheck blocker and how it gets resolved, and split long sentences; I left the rubric and procedure unchanged and recorded the classroom wording as gaps.
+- Tool: Claude Code ran my installed plan-check against the live thread on October 28, in the same session that wrote the drafts.
+- What it produced: run 1 failed thread-and-conventions because the comment skipped "Blocked by #15947"; runs 2-4 passed all seven checks.
+- Difficulties: the skill still had Path Review wording and expected posted reports/plans, while this phase kept them local.
+  The writer also graded the drafts, so this was not an independent check.
+- What changed: the drafts added the merged blocker, adjacent PR #21442 and the typecheck problem with its planned resolution.
+  I kept the rubric and procedure unchanged and recorded those course-wording gaps.
 
 ---
 
@@ -484,11 +493,13 @@ The full output and file hashes are saved locally, with published-commit and wor
 
 **Toolkit**
 
-- Tool: Claude Code ran the reproduction, the new tests with and without the source change, and the four ship-manifest commands in fresh login shells, on main and on the branch, and saved the raw output.
-- What it produced: the reproduction going from red on c298f416 to green on c1e6c182, eight new tests that fail without the fix, all four manifest checks passing on the branch, and on main a typecheck failure caused only by my untracked test.
-- Difficulties: three schema-model suites failed with ENOENT because my sparse checkout lacked src/Designer/testdata, yarn spell:quick needed scripts/ plus typos and hunspell, and a test that loads the pages after the layouts showed my first restore losing the selection.
-- What changed: added src/Designer/testdata and scripts/ to the sparse checkout and installed typos 1.51.1 (the CI version) and hunspell, kept the manifest's exclusion table empty, changed the restore to read the URL, and left the reproduction file unchanged; with my approval it was removed from the checkout after its after-fix run instead of having its import edited.
-  On November 3, Claude Code found that the npx command for Node 22 printed v26.13.0, so it reran the full suite and the other checks with Node 22.22.3 first on PATH and printed that version in the run.
+- Tool: Claude Code ran the reproduction, the new tests with and without the source fix, and the four manifest checks, saving the output.
+- What it produced: the reproduction failed on c298f416 and passed on c1e6c182, eight new tests failed without the fix, and all four project checks passed on the branch.
+- Difficulties: the checkout lacked testdata and scripts, spelling needed typos and hunspell, and late page data broke the first restore.
+  On November 3, the supposed Node 22 command also turned out to run Node 26.
+- What changed: Claude added the missing folders and spelling tools, kept the exclusion table empty and changed the restore to read the URL.
+  After its unchanged after-fix run, I approved removing the local reproduction file whose unused import failed typecheck.
+  The November 3 checks were rerun with Node 22.22.3 first on PATH and its version printed.
 
 ---
 
@@ -530,10 +541,11 @@ The issue and PR still have no human maintainer reply, and the main workflows ar
 
 **Toolkit**
 
-- Tool: Claude Code, which edited AppContext.tsx and FormItemContext.tsx, wrote the tests with Vitest and Testing Library, and committed on my fork's branch after each step I approved.
-- What it produced: commit c1e6c182, which changes two source files, their two test files and the test router helper, with ten new tests; on November 3, commit beee7db6, the review follow-up.
-- Difficulties: the first restore design passed every test except the one where the pages load after the layouts, which exposed both ComponentConfigPanel's render-time clear and an awaited no-op save; ESLint also rejected an `import()` type in the test.
-- What changed: the restore reads the component ID from the URL and sets both selection copies, the page-change effect skips the empty save, the test uses `vi.importActual` without the type annotation, and plan.md and Solution Approach record all of it as deviations.
+- Tool: I used Claude Code for the initial implementation and tests, then Codex and Claude Code for the review follow-up, with commits on my fork after approval.
+- What it produced: c1e6c182 changed the two providers, their tests and the router helper, with ten new tests; beee7db6 contains the November 3 follow-up.
+- Difficulties: late page data exposed the render-time clear and the empty-save delay, and ESLint rejected an `import()` type in the test.
+- What changed: the restore reads the URL and updates both selection copies, the page effect skips an empty save, and the test uses vi.importActual without that annotation.
+  The plan and deviations record the changes.
 
 ---
 
@@ -569,10 +581,13 @@ Notes for reviewers says Claude Code traced the flow, wrote the initial change a
 
 **Toolkit**
 
-- Tool: the ship-gate, run by hand on my branch and again through its hook when Claude Code ran `gh pr create` in a fresh session, together with my voice guard; later, Codex ran the official PR-monitor with my playbook, first as --state and then with a text-only Sonnet call; on November 3, Claude Code ran Sol reviews of the follow-up through Codex.
-- What it produced: `ship-gate: PASS` with all four manifest checks and all six pr-precheck checks passing, a voice-guard stop on the first PR attempt, and PR #21606 after the second attempt; the monitor later produced a feedback-in report and a draft reply to CodeRabbit, and Sol approved beee7db6 after two rounds.
-- Difficulties: the gate found no PR template because my sparse checkout leaves out .github, pr-precheck wanted the local checks and hosted CI in the description, and the guard rejected the emoji; the monitor's default configuration was logged out, its checks summary omitted blocked workflows, and its draft proposed the wrong discard path; the npx command for Node 22 had started running the host Node 26.
-- What changed: I added the local-checks/hosted-CI line, removed the emoji and kept the AI disclosure before the gate ran again; for Unit 8, Codex used the existing configuration selected by cl --which, checked the draft against the code and Actions API, and prepared a separate corrected reply; neither draft was posted, and the replies I approved on November 3 were written against beee7db6, whose final checks ran on a real Node 22.
+- Tool: Claude Code opened the PR through ship-gate and the voice guard; Codex later ran PR-monitor, and Claude Code arranged the November 3 Sol reviews through Codex.
+- What it produced: four project checks and six pr-precheck checks passed before PR #21606 opened.
+  The monitor drafted a reply, and Sol approved beee7db6 after two review rounds.
+- Difficulties: the sparse checkout hid the PR template, the guard stopped an emoji, the monitor needed a logged-in configuration and chose the wrong discard path, and the Node 22 command later ran Node 26.
+  The monitor's check summary also missed blocked workflows.
+- What changed: I had the CI-status line added and the emoji removed before the gate reran, then had its hook removed after opening while keeping its files.
+  Codex kept both reply drafts local and checked the code and Actions API; I approved the November 3 replies against beee7db6 after checks on a real Node 22.
 
 ---
 
@@ -580,31 +595,38 @@ Notes for reviewers says Claude Code traced the flow, wrote the initial change a
 
 **Technical Skills Gained**
 
-- URL state versus React state: the editor kept the page in the URL but the selected component only in `useState`, so a reload could restore one and not the other.
-- React Router 7.18.2's `setSearchParams` builds a functional update from the params of the last render, so two writes in one click lose one of them; I learned to make each user action write the URL once.
-- The same selection lived in two places, `AppContext.selectedItem` and `FormItemContext.formItem`, and `ComponentConfigPanel` clears the first during render when the second is empty, so a fix had to restore both together.
-- Effect order and async gaps matter: awaiting a save that had nothing to save pushed a discard past my restore and wiped it.
-- Testing with the real `MemoryRouter` and providers instead of mocking `useSearchParams`, remounting at a captured URL to stand in for a reload, and proving each new test fails by temporarily reverting only the source files.
-- Running a real project's checks the way CI does: Node 22 next to a host Node 26, Yarn's immutable install, a sparse checkout that needed extra folders, and `yarn spell:quick` with pinned typos and hunspell.
-- Contribution conventions in Altinn Studio: a fork-based PR, a Conventional Commits title, the Summary/Evidence/Risk/Follow-ups template, and fork CI that waits for maintainer approval.
+The main thing I took from this is that one selection on screen can live in more than one place in the code.
+AppContext chose the panel, while FormItemContext held the edited item and tree selection.
+Both had to be restored together.
+
+I also had to pay attention to when the URL changes.
+React Router 7.18.2 builds setSearchParams updates from the last render, so two writes in one click can undo each other.
+The later review found the same risk across an await during deletion.
+Even awaiting a save with nothing to save changed the effect order and cleared the restored item.
+
+The useful test pattern was to use the real router and providers, capture the URL, then remount at it.
+Checking the new tests without the source fix helped show what they actually caught.
+The setup mattered too: sparse-checkout folders, the Node version and spelling tools all affected whether the project checks could run.
+I also worked through Altinn's fork workflow, PR template and CI approval process.
 
 **Challenges Overcome**
 
-- Picking an issue I could really take: my first course-site pick, #12123, still had an older claim, so I switched to #10955 and asked the scope question in my claim instead of guessing.
-- Reproducing a browser-reload bug without a signed-in Studio: a provider remount test showed component Input coming back as page Side1, and it stayed red on the newer main a week later.
-- My first fix passed every test except one that loads the pages after the layouts; that test exposed the render-time clear and the awaited empty save, and the fix changed to read the component from the URL and to skip that save.
-- My own tools pushed back, and each stop was useful: plan-check rejected my first plan comment for ignoring the thread's "Blocked by #15947" note, typecheck failed on my own reproduction test's unused import, and the voice guard stopped a missing body file and then the emoji in my PR description.
-- Setup gaps that looked like test failures: three schema suites failed only because my sparse checkout lacked `src/Designer/testdata`.
-- A PR-monitor draft I could not send as written: it proposed the generic discard path and called the deletion fix unrelated, and its checks summary left out the workflows waiting for approval, so the draft had to be checked against the code and the Actions API.
+- I changed issues after finding the old claim on #12123, even though the scout had accepted it.
+- Without a signed-in Studio, I used the provider remount as narrower evidence and kept the missing browser check visible.
+- The late-pages test caught a first fix that looked fine in the simpler cases, so Claude changed the restore source and skipped the empty save.
+- Some failures came from my setup: missing testdata, an unused import and a body-file path the guard could not read.
+  The guard also stopped the emoji in the PR description, and plan-check caught the missing explanation of blocker #15947.
+- The monitor drafted a reply that chose the wrong discard path and missed blocked workflows in its summary.
+  Codex checked that against the code and Actions API before any response went out.
 
 **What I'd Do Differently Next Time**
 
-- Run the project's full checks, not just lint and Prettier, as soon as I add a local test; typecheck would have caught the unused import a week earlier.
-- Write the "data arrives in a different order" test before the first implementation, because that ordering is what decided the design.
-- Find out early whether I can run the product locally with a test account, so the PR can show a screenshot instead of only test output.
-- Read and rewrite the AI-drafted PR description myself before it goes out, and give the agent that opens the PR a narrower task, since it also edited a local notes file I had not asked it to touch.
-- Post a short progress note earlier than the last day of the report-back window, so maintainers see the findings while there is still time to steer the scope.
-- Print `node --version` in every evidence run, because the same npx command for Node 22 later ran Node 26 and most of my October 28 logs cannot show which version they used.
+- Run the full checks as soon as I add a test, and print `node --version` in each evidence run.
+  The same npx command later used Node 26, so I cannot treat the command text as proof of the version.
+- Add the different-data-arrival-order test earlier; that case changed the design.
+- Check early whether a local test app can support a browser run and screenshot.
+- Spend more time reviewing the AI-written description before approving it, and keep the publishing agent's task narrow after it edited a local notes file outside its assigned scope.
+- Report progress earlier than the last day of the window, leaving time for the maintainer to steer the scope.
 
 ---
 
