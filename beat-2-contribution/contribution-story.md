@@ -94,14 +94,16 @@ I switched from my course-site reservation of #12123 because that issue still ha
 On October 21, I released the #12123 reservation and claimed #10955 on the course Issue Selection site.
 My screenshot shows the release banner, the matching #10955 title under Your issues (1), and an Unclaim button; this confirms the course-site reservation, not a GitHub claim comment or maintainer assignment.
 
-This fits my React/TypeScript experience and gives me practice distinguishing in-memory UI state from URL state, preserving neighboring routing behavior and writing evidence a maintainer can review.
+This fits my React/TypeScript experience.
+I hope to learn how to separate in-memory UI state from URL state, how to keep neighboring routing behavior intact and how to write evidence a maintainer can review.
 At the checked-out commit, Studio routes frontend major versions 9+ to ux-editor, 4 through 8 to ux-editor-v4 and earlier versions to ux-editor-v3; the first two keep component selection in local React state, so I raised the editor-version scope with the maintainers first; with no answer by October 28, I built only ux-editor and said so in the PR.
 On October 21, my Unit 6 scout re-grade, run directly in Claude Code with the scope-feasible rubric, accepted both #10955 and #12123.
 Its difficulty note rates #10955 ambitious: the issue is marked for consideration, ready-for-dev was removed on September 25, 2026, and the editor-version scope is open, so my claim has to raise that question first.
 It rated #12123 straightforward and ranked it higher on fit, but that accept still rests on the stale-claim allowance described above.
 My scout helped find a coherent candidate, but its old availability rule and the course-site reservation were not sufficient evidence that #12123 was available under this week's rules.
 I applied the course scope-feasible patch and recorded the replaced check in scan-notes.md; the final Unit 5 20/20 run belongs to the earlier rubric, not this patched version.
-This story draft, source investigation and local baseline were prepared with Codex assistance; I reviewed the final claim wording myself before it was posted.
+Codex and Claude Code drafted the text of this story from my records, including this section, Understanding the Issue, the weekly Toolkit entries and Learnings and Reflections, and I chose to submit that text without rewriting it myself.
+Codex also prepared the source investigation and local baseline; I reviewed the final claim wording myself before it was posted.
 
 Claim comment: https://github.com/Altinn/altinn-studio/issues/10955#issuecomment-6330240501 (posted 2026-10-21 18:12 PDT).
 The prepared draft asks about the editor-version scope, names the first reproduction check, gives a one-week report-back window and discloses Codex assistance.
@@ -204,7 +206,7 @@ To rerun these steps now, put a real Node 22 first on PATH, check `node --versio
 - **Commit showing reproduction:** none - the test was a local untracked addition and was never committed, so its complete source is included below.
 - **Expected:** after the fresh mount, selectedItem remains { type: 'component', id: 'Input' }.
 - **Actual:** it becomes { type: 'page', id: 'Side1' }; the earlier runtime-selection and layout/same-URL checks pass.
-- **Observed command result:** exit 1, with one new failing assertion and all nine existing tests passing.
+- **Screenshots/logs:** no screenshot, because this ran as a test without a browser; the command exited 1, with one new failing assertion and all nine existing tests passing.
 
   ```text
    Test Files  1 failed | 1 passed (2)
@@ -486,6 +488,7 @@ The full output and file hashes are saved locally, with published-commit and wor
 - What it produced: the reproduction going from red on c298f416 to green on c1e6c182, eight new tests that fail without the fix, all four manifest checks passing on the branch, and on main a typecheck failure caused only by my untracked test.
 - Difficulties: three schema-model suites failed with ENOENT because my sparse checkout lacked src/Designer/testdata, yarn spell:quick needed scripts/ plus typos and hunspell, and a test that loads the pages after the layouts showed my first restore losing the selection.
 - What changed: added src/Designer/testdata and scripts/ to the sparse checkout and installed typos 1.51.1 (the CI version) and hunspell, kept the manifest's exclusion table empty, changed the restore to read the URL, and left the reproduction file unchanged; with my approval it was removed from the checkout after its after-fix run instead of having its import edited.
+  On November 3, Claude Code found that the npx command for Node 22 printed v26.13.0, so it reran the full suite and the other checks with Node 22.22.3 first on PATH and printed that version in the run.
 
 ---
 
@@ -528,7 +531,7 @@ The issue and PR still have no human maintainer reply, and the main workflows ar
 **Toolkit**
 
 - Tool: Claude Code, which edited AppContext.tsx and FormItemContext.tsx, wrote the tests with Vitest and Testing Library, and committed on my fork's branch after each step I approved.
-- What it produced: commit c1e6c182, which changes two source files, their two test files and the test router helper, with ten new tests.
+- What it produced: commit c1e6c182, which changes two source files, their two test files and the test router helper, with ten new tests; on November 3, commit beee7db6, the review follow-up.
 - Difficulties: the first restore design passed every test except the one where the pages load after the layouts, which exposed both ComponentConfigPanel's render-time clear and an awaited no-op save; ESLint also rejected an `import()` type in the test.
 - What changed: the restore reads the component ID from the URL and sets both selection copies, the page-change effect skips the empty save, the test uses `vi.importActual` without the type annotation, and plan.md and Solution Approach record all of it as deviations.
 
@@ -592,6 +595,7 @@ Notes for reviewers says Claude Code traced the flow, wrote the initial change a
 - My first fix passed every test except one that loads the pages after the layouts; that test exposed the render-time clear and the awaited empty save, and the fix changed to read the component from the URL and to skip that save.
 - My own tools pushed back, and each stop was useful: plan-check rejected my first plan comment for ignoring the thread's "Blocked by #15947" note, typecheck failed on my own reproduction test's unused import, and the voice guard stopped a missing body file and then the emoji in my PR description.
 - Setup gaps that looked like test failures: three schema suites failed only because my sparse checkout lacked `src/Designer/testdata`.
+- A PR-monitor draft I could not send as written: it proposed the generic discard path and called the deletion fix unrelated, and its checks summary left out the workflows waiting for approval, so the draft had to be checked against the code and the Actions API.
 
 **What I'd Do Differently Next Time**
 
@@ -600,6 +604,7 @@ Notes for reviewers says Claude Code traced the flow, wrote the initial change a
 - Find out early whether I can run the product locally with a test account, so the PR can show a screenshot instead of only test output.
 - Read and rewrite the AI-drafted PR description myself before it goes out, and give the agent that opens the PR a narrower task, since it also edited a local notes file I had not asked it to touch.
 - Post a short progress note earlier than the last day of the report-back window, so maintainers see the findings while there is still time to steer the scope.
+- Print `node --version` in every evidence run, because the same npx command for Node 22 later ran Node 26 and most of my October 28 logs cannot show which version they used.
 
 ---
 
