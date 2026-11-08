@@ -255,13 +255,35 @@ The toolkit still cannot finish a contribution without me.
 It can scan, grade, reproduce, write, and check, and it cannot pick what is worth my time, approve words that carry my name, or decide a tradeoff like keeping dex 952 open after another pull request beat it by four minutes.
 Most of its rules exist because a real case forced them, which also means the cases that have not happened yet have no rule.
 Nothing in it tests how a change feels to use, only whether it works.
-What comes next is mostly waiting that I should not shorten.
-Altinn 21606 is still in review as of November 7, with six workflows waiting for approval, and eight external pull requests are still open, including storybook 37092, renovate 47597, grafana 136956, and super-productivity 11434.
+
+Next I keep improving the skills.
+The voice guard reads command text and does not expand shell variables, so a path held in a variable still gets stopped.
+The next change is to resolve those paths before the check runs.
+The ship gate's npx pin ran Node 26 after Homebrew changed my default.
+The next change is a pinned Node 22 toolchain that prints node -v on every run.
+The rerun on November 3 already did this and printed v22.22.3.
+The opensource skill has no screen reader or window resizing coverage on UI changes, and ordewell 142 needed the maintainer to add those fixes.
+The next change is a UI check in the profile before a pull request opens.
+
+I keep evaluating.
+issue-scout has not run an eval since the scope-feasible change on October 21, so the current rubric has no score.
+The next step is to rerun the Unit 1 harness against it.
+pr-monitor has run in full only once, and that draft could not be sent.
+The next step is one more full run on a pull request that is still open, with the two drafts compared.
+plan-check still carries the wording conflict I found on October 28 between its rubric and its procedure on reporting finished results.
+The next step is to settle that wording and rerun its eval.
+
+I keep contributing.
+Eight external pull requests are still open, including storybook 37092, renovate 47597, grafana 136956, and super-productivity 11434.
+Altinn 21606 is still in review as of November 7, with six workflows waiting for approval.
+Two issues are waiting on their owners, hass-eink-dashboard 103 and ucsd-easy-a-radar 86.
+The repositories that already merged my work, such as dex, ordewell, and Sentient, still show up in my scans, and I keep taking work there.
+
 Unit 10 is Demo Day, five minutes, presented from this page, and I would rather spend that time on the astryx and Sentient cases than on the tools themselves.
 
 **Tool limits.** One line per featured tool, in the same order as the entries above.
 
-issue-scout: It cannot tell whether an issue is about to be claimed by someone else
+issue-scout: It cannot tell whether an issue is about to be claimed by someone else, and its rubric has not been scored since the scope-feasible change on October 21, so its current accuracy is unmeasured
 voice guide and voice guard: It reads the command text and does not expand shell variables, so paths held in variables and a body file read from stdin get stopped, and it crashed twice while another session was editing check_voice.py itself
 opensource skill: UI changes carry no screen reader or window resizing coverage, and ordewell 142 needed the maintainer to add those fixes, and on this Mac some repositories fail tests on a clean base, astryx had 48, so a base comparison is the only way to judge my own failures
 pr-precheck and ship gate: The manifest runs Node through an npx package pin, and after Homebrew put Node 26 on this machine that command ran 26 instead of 22, and the October 28 follow-up checks did not print a version, so the gate record does not prove which Node ran
