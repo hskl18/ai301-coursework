@@ -20,8 +20,7 @@ check-in; graders open the folder for that unit's work.
   submitted once. A second contribution is welcome and never graded: copy
   `extra-round-template.md` to `contribution-story-2.md`.
 - `beat-3-portfolio/`: `toolkit-portfolio.md` is Assignment 6, the unit-9
-  toolkit portfolio. It is the skeleton you fill in unit 9; until then it
-  waits.
+  toolkit portfolio.
 
 In units 1-4 everything you upload goes to two places: `tools/` for that
 unit's skill folder, and `beat-1-sandbox/unit-N/` for its write-up and
