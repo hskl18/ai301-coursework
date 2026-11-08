@@ -1,118 +1,244 @@
 # Toolkit Portfolio
 
-Path: `beat-3-portfolio/toolkit-portfolio.md`
-
-This file is Assignment 6, and it is graded at the path above; a copy kept anywhere else in
-the repository is not read. It has been waiting here since you created the repo in unit 1;
-unit 9 is when you write it.
-
-**Only this page is read.** Your `tools/` folders and your installed skill folders are never
-opened, so every piece of evidence you want seen has to live inline here: an output excerpt,
-a before/after pair, a dated commit reference.
-
-**Write every sentence yourself.** AI may gather diffs, dates and excerpts for you; it does
-not draft entries.
-
-**Keep every section header below under its exact name** — Featured Tools, Inventory, The
-Arc, and Limitations and What's Next. Feature three or four tools, each in the entry shape
-shown below; give every other tool one inventory line.
-
-**Some lines below are labelled, and the label is how they are read.** Three places on this
-page use a `Label: your words` shape — the arc's beats, the tool-limits list, and nothing
-else. Keep those labels exactly as written, one per line, and never delete a labelled line:
-where you have nothing to put after a label, write `none` and move on. A deleted label reads
-as a deleted answer.
-
-**Before you finish**, replace every `[bracketed prompt]` with your own words, then delete
-the unused `[Tool name]` entry stub, its copy-me sentence, and the prompt sentences under
-each header. A leftover bracketed prompt reads as unfilled.
-
-**Student:** [Student name]
+**Student:** Hanbin Tan
 
 ## Featured Tools
 
-Three or four tools, presented in depth. Open with a few sentences
-on why you chose these.
+I picked these four because each one did live work this term and each one changed after it hit a real case.
+issue-scout picked the issue my whole contribution came from.
+The voice guide and guard touched almost every word I sent upstream.
+The opensource skill took the same workflow outside the course and produced merged pull requests I did not expect when the term started.
+The ship gate is where pr-precheck stopped being an eval tool and ran on a real pull request.
 
-Full credit asks the featured set to show real change: **at least two** of your featured
-entries should show a tool that visibly moved through use. An honest entry for a tool that
-barely changed — saying so, dating what did happen, and giving the reason — earns the solid
-middle tier and never fails you.
+**issue-scout**
 
-Each tool's honest limit is not written here. It goes in the tool-limits list at the
-bottom of this page, one line per featured tool, so that the limits sit together and can be
-read as a set.
+**What it is, and the judgment hole I wrote:** issue-scout searches GitHub for a first issue instead of grading one issue I already have.
+It runs four queries, narrows the results, and grades the top candidates with a rubric I wrote.
+The rubric has ten checks.
+The judgment part is the boundary rules in that rubric.
+I decide what counts as one piece of work, what counts as a repository I can work in, and when an issue is already taken even if it is still open.
+It grew out of issue-select from Unit 1, which graded one candidate at a time and reached 20 out of 20 on its eval run in commit b9d6687 on September 16, 2026.
 
-[Why these tools, in your own words.]
+**How it evolved, dated:**
 
-Copy the entry shape below once per featured tool and fill it there.
+- 2026-10-14, I built issue-scout and ran its first scan.
+  Four queries returned 400 results, I narrowed them to 139 repositories, and I graded the top five.
+  Two full eval runs came back 19 out of 20, and both misses came from one rule I had written too loosely.
+  The first read several proposed fixes for one UI freeze as an open ended program, and the second read a short list of missing variants in one component as an open ended feature list.
+  I clarified the umbrella rule after each miss, and the next complete run reached 20 out of 20.
+- 2026-10-21, for Unit 6, I replaced the one bounded task test with the course staff's scope-feasible row, and I split difficulty away from acceptance, so a hard issue could pass and carry a difficulty note instead of failing.
 
-**[Tool name]**
+**Evidence:** The before and after of that central check, from my own rubric files.
 
-**What it is, and the judgment hole I wrote:** [what the tool does,
-and the part of it that is your judgment: the rubric, strategy,
-guide, manifest, or playbook you wrote.]
+```text
+Before, tools/issue-select/rubric.md, commit b9d6687
+Pass if the body asks for one change a newcomer could finish in a single
+pull request. Fail if it is an umbrella or tracking issue: a list of other
+issue numbers, a self-described "megaissue", or an open-ended program such
+as "incrementally add X across the codebase".
 
-**How it evolved, dated:** [the changes that made it yours, each
-with its date and the friction that drove it; your weekly Toolkit
-entries are the source.]
+After, the rubric behind the 20/20 run on 2026-10-14
+(unit5-drafts/eval-runs/full-08-inputs/rubric.md)
+Several possible causes or implementation suggestions for one observable bug
+do not by themselves make an umbrella.
+Completing the same behavior for a finite set of cases, variants or supported
+operations in one component can also be one task; do not count each example as
+an independent feature.
+A trailing "etc." in a terse report does not by itself establish an ongoing
+program when the title and examples identify that single component behavior.
+```
 
-**Evidence:** [show, don't claim: an output excerpt, a before/after
-pair, or a dated commit reference, inline here. Draw it from your real
-term work where you can - a catch this tool actually made, a
-before/after from your own repo or PR - which is graded separately from
-whether an artifact is present at all. A short, telling excerpt beats a
-pasted transcript.]
+```text
+From scan-notes.md
+All 20 calls completed, agreement was 19/20, all five category floors passed, and the harness exited 0 with a complete generated transcript.
+`full-06` corrected the performance-report false negative but still scored 19/20 because a short list of missing variants in one component was misread as an open-ended feature list.
+`partial-07` matched 5/5, then the independent complete `full-08` run matched 20/20 with every category perfect and no call errors.
+```
+
+The live result of that scan is in my contribution story.
+The scout passed Altinn issue 10955, and that became pull request 21606.
+
+**voice guide and voice guard**
+
+**What it is, and the judgment hole I wrote:** The voice guide is one file that holds my rules for writing upstream.
+I merged the rules from the Unit 2 to 4 skills into it, and I added rules for claims, questions, and pings.
+Three live skills read the same guide.
+The guard is a hook that runs check_voice.py on outgoing GitHub commands and stops a command when the body breaks a rule in the guide or when it cannot read a body at all.
+The judgment is the guide itself.
+Every rule in it is a line I drew about what I will and will not say to a maintainer.
+
+**How it evolved, dated:**
+
+- 2026-10-21, I installed the guide and the guard, and the first version already stopped a real command that day because the body file path did not resolve.
+- After that, the log dates the first time each rule stopped a real draft.
+- 2026-10-25, the first was the one about skipping praise, emoji, and grand claims.
+- 2026-10-29, the rule against a guaranteed fix or a delivery date, and the rule about offering a first step and a report back window instead.
+- 2026-11-02, the disclosure rules, naming the AI tools in Notes for Reviewers and disclosing assistance in every course pull request.
+- 2026-11-03, the rule about asking one question after showing the attempt.
+- 2026-11-04, three rules first fired in one day: never promise a fix before the evidence exists, mark a suspected cause as a hypothesis until a test isolates it, and do not claim I personally typed or ran work that an agent did.
+- 2026-11-05, the rule against an untested root cause claim.
+
+**Evidence:** From guard-log.md.
+Between 2026-10-21 17:20 and 2026-11-07 21:07 the guard ran 429 checks, passed 338, and stopped 91.
+Two stops from the log, each with the pass that followed, word for word.
+
+```text
+- 2026-10-21 18:11 [hook] stop: could not read the body file: [Errno 2] No such file or directory: '/Users/ice/school/codepath/ai301/unit6-drafts/claim-post-01/claim-draft | target: gh issue comment https://github.com/Altinn/altinn-studio/issues/10955 --body-file
+- 2026-10-21 18:12 [hook] pass | target: gh issue comment https://github.com/Altinn/altinn-studio/issues/10955 --body-file
+- 2026-10-28 19:10 [hook] stop: rule broken: "Skip praise, emoji, grand claims, and extra headings that do not help a reader rerun the case." | target: gh pr create --repo Altinn/altinn-studio
+- 2026-10-28 19:15 [hook] pass | target: gh pr create --repo Altinn/altinn-studio
+```
+
+The October 28 stop was an emoji attribution line in my pull request body.
+I had it removed, the guard passed five minutes later, and pull request 21606 opened.
+
+**opensource skill**
+
+**What it is, and the judgment hole I wrote:** The opensource skill is the course workflow running outside the course.
+It scans repositories, grades issues, and drives the work after I pick one.
+The agents do the scanning, the reproduction, the code, the tests, and the draft text.
+I pick the issue, I approve every piece of text before it goes out, I sign the CLA when a repository asks for one, and I make the calls when two reasonable options conflict.
+Every outgoing text passes the voice guard above, and plans and code pass a Sol review before a pull request opens.
+The judgment part is my profile for it, which repositories and issue shapes it should look for, and the rules I keep adding to that profile after something goes wrong.
+
+**How it evolved, dated:**
+
+- 2026-10-29, my first pull request from the opensource skill, shopnex 74, merged 29 minutes after it opened.
+  An independent review then scored it 7 out of 10 because it ignored the issue asking for one example only, and it did not follow the install style in the README next to it.
+  I added a rule after that: what the issue asks for and what the maintainer already does come before my own preference.
+- 2026-10-30, I learned that popular repositories often ban AI from good first issues, beets, blockly, and Qiskit among them.
+  I added repo_queries to the profile, ts-popular and py-popular, scanning help wanted on repositories over 5k stars, and I made the scan halve per_query when GitHub reports resource limits.
+- 2026-11-01, a Sol reviewed rework landed: a follow command that prints the live state of every pull request in review at once, ledger append, atomic ledger writes with a check after writing, retries on 5xx errors, bot opened issues removed, and work files kept in a folder next to the clone.
+- 2026-11-02, I changed the order rule from returning repositories first to new repositories first.
+- 2026-11-03, nanocoder 1929 was claimed by someone else about an hour after my scan, while it sat waiting for my confirmation.
+  I changed the rule so repositories that need a claim first get the claim text at once.
+
+**Evidence:** My ledger as of 2026-11-07, after 19 scans from 2026-10-29 to 2026-11-05.
+The ledger has 123 rows: rejected 71, accepted 23, dropped 7, closed 2, waiting 2, pull request open 9, merged 9.
+The nine merged pull requests span five repositories and total plus 2349 and minus 91 lines.
+
+| Pull request | Change | Opened (UTC) | Merged (UTC) |
+|---|---|---|---|
+| [shopnex 74](https://github.com/shopnex-ai/shopnex/pull/74) | docs | 10-29 07:44 | 10-29 08:13, 29 minutes |
+| [ordewell 140](https://github.com/ordewell/ordewell/pull/140) | docs | 10-29 09:26 | 10-29 10:40 |
+| [dex 952](https://github.com/exmergo/dex/pull/952) | DuckDB seed fix | 10-30 01:17 | 10-30 10:04 |
+| [Sentient 537](https://github.com/existence-master/Sentient/pull/537) | forget tool fix | 10-29 20:25 | 10-31 04:45 |
+| [dex 1025](https://github.com/exmergo/dex/pull/1025) | Snowflake estimate fix | 11-01 04:51 | 11-01 09:59 |
+| [ordewell 142](https://github.com/ordewell/ordewell/pull/142) | composer tip | 11-01 07:01 | 11-01 17:57 |
+| [dex 1052](https://github.com/exmergo/dex/pull/1052) | explore profile fix | 11-02 07:44 | 11-02 10:51 |
+| [meta astryx 9719](https://github.com/meta/astryx/pull/9719), 14,712 stars | hook docs | 11-03 06:15 | 11-03 09:31 |
+| [Sentient 548](https://github.com/existence-master/Sentient/pull/548) | memory fix | 11-02 09:13 | 11-07 16:25 |
+
+A maintainer review, word for word, on Sentient 548.
+
+```text
+Thanks @hskl18, this does exactly what #547 asked for, and your real-test
+notes matched what I saw. Approving.
+```
+
+The astryx pull request is the new repositories first rule paying off the next day.
+It opened on November 3 and merged in 3 hours and 16 minutes.
+
+**pr-precheck and ship gate**
+
+**What it is, and the judgment hole I wrote:** pr-precheck is my Unit 4 tool.
+It grades a pull request package against the plan it claims to follow and the issue behind that plan, and it answers one question: is this ready to submit.
+The judgment part is its rubric and contract, which I wrote.
+The ship gate is what pr-precheck turned into on live work.
+I wrote a manifest, ship-manifest.md, that lists the four checks from the Altinn frontend CI, unit tests, typecheck, ESLint with Prettier, and spell quick, with the workflow file each one came from.
+The gate runs those four project checks and the six pr-precheck checks before a pull request is allowed to open.
+
+**How it evolved, dated:**
+
+- 2026-10-08, pr-precheck landed in commit 2c7ed2e as an eval facing tool.
+- 2026-10-28, I wrote the ship manifest from the Altinn frontend CI.
+  The first baseline run found two setup problems before it found anything about my change: my sparse checkout was missing testdata, and my reproduction test carried an unused import.
+  I fixed both.
+  The gate then passed all four project checks and all six pr-precheck checks.
+  The voice guard stopped the pull request body over the emoji line described above, I had it removed, and the gate ran again before the pull request opened.
+  After pull request 21606 opened, I removed the ship gate hook and kept the gate files and the manifest.
+
+**Evidence:** One row from ship-manifest.md, and the two notes under the table.
+
+```text
+| Typecheck | `npx --yes --package=node@22 -- node .yarn/releases/yarn-4.18.0.cjs workspace studio-designer-frontend typecheck` | .github/workflows/designer-frontend-unit-tests.yml, step Doing the typecheck (`yarn typecheck` in src/Designer/frontend) |
+
+The CI job's `yarn strict-null-checks` is not listed because tsconfig-strict.json only includes `libs`, which this change does not touch.
+On main c298f416 (2026-10-28) every row passed except the untracked #10955 reproduction test, which failed by design and was removed from the checkout after its after-fix run.
+```
 
 ## Inventory
 
-One line each for the rest of the toolkit: what it is and where it
-stands (one bullet per tool; a compact sentence or two is fine).
-
-- [Tool name: one line.]
+- issue-select, Unit 1, commit b9d6687 on 2026-09-16, graded one candidate issue at a time and reached 20 out of 20, and issue-scout grew out of it in Unit 5.
+- repro-check, Unit 2, commit 4bec228 on 2026-09-23, 20 out of 20, grades a claim and reproduction package before it posts, and on 2026-10-21 I added a report back window that does not promise a fix date.
+- plan-check, Unit 3, commit c9fa271 on 2026-09-30, 20 out of 20, grades a plan package before I build from it, and it still carries a wording conflict I found on 2026-10-28 between its rubric and its procedure on reporting finished results honestly, which I left in place and recorded.
+- repo memory, Unit 6, a CLAUDE.local.md file holding the Altinn build and test commands, with a 9 out of 9 AppContext baseline when I set it up.
+- pr-monitor, installed 2026-10-28, watches my open pull request and drafts replies from a playbook built on my voice guide, and its first full run is in the arc below because its draft could not be sent.
+- Sol review loop, the cdx review pass that plans and code go through before anything ships, with one to three rounds recorded on most of my external pull requests.
 
 ## The Arc
 
-The story of the toolkit in order: friction, change, result, dated.
-Your weekly Toolkit entries are the source; read your own record and
-tell it oldest first.
-
-Write one block per beat, in the shape below, oldest first. Keep all four labels on every
-beat, each on its own line. The `Result:` line is what the beat was for: it says what
-happened *after* the change, which is not the same sentence as the change itself. If a beat
-never reached a result, write `Result: none` — an honest beat that did not land still counts
-fully as a beat.
-
-Full credit asks for **at least two** beats whose `Result:` line names something that
-actually happened afterwards. A beat about something that did not work counts fully as a
-beat, and when the work happened never moves this score.
-
 **Beat 1**
-Date: [a date, or a month and year]
-Friction: [what was going wrong, and how you noticed]
-Change: [what you changed because of it]
-Result: [what happened afterwards, or the word none]
+Date: October 14, 2026
+Friction: issue-scout read several proposed fixes for one UI freeze, and then a short list of missing variants in one component, as open ended work, and two full eval runs stopped at 19 out of 20
+Change: I clarified the rule twice, saying several fixes for one behavior, or a finite set of variants in one component, do not make an issue an umbrella issue
+Result: The next complete run reached 20 out of 20
 
 **Beat 2**
-Date: [a date, or a month and year]
-Friction: [what was going wrong, and how you noticed]
-Change: [what you changed because of it]
-Result: [what happened afterwards, or the word none]
+Date: October 21, 2026
+Friction: The voice guard stopped my claim comment on Altinn 10955 because it could not read the body file at a relative path
+Change: I had Claude switch the command to an absolute path and post the claim through the guard instead of around it
+Result: The guard passed at 18:12 and the claim posted once, and the same guard is still running, with 429 checks logged by November 7
 
-Copy the beat shape above for as many beats as your term had.
+**Beat 3**
+Date: October 28, 2026
+Friction: The ship gate baseline failed on my own setup, a sparse checkout missing testdata and an unused import in my reproduction test
+Change: I added the missing folders, removed the import, and ran the four manifest checks and the six pr-precheck checks as one gate
+Result: The gate passed in full, and after the voice guard stop on the emoji line was cleared, pull request 21606 opened that evening
+
+**Beat 4**
+Date: October 28, 2026
+Friction: The pr-monitor draft for that same pull request picked the wrong discard path, called my local deletion fix unrelated, and its three passing summary missed six workflows waiting for approval
+Change: I kept the draft local and had Codex write a corrected version from the Actions API instead of the summary
+Result: No reply went out from that draft, and the replies that did go out waited until November 3, after the fixes reached beee7db6 and I approved them
+
+**Beat 5**
+Date: October 29, 2026
+Friction: My first pull request from the opensource skill merged in 29 minutes, and an independent review still scored it 7 out of 10 because it ignored the issue asking for one example and did not follow the README install style next to it
+Change: I added a rule to the opensource profile: what the issue asks for and what the maintainer already does come before my own preference
+Result: ordewell 140 merged the same day, and every plan the skill writes now starts from the issue's explicit asks, one per line
+
+**Beat 6**
+Date: November 2, 2026
+Friction: My opensource scans kept returning to repositories I had already worked in, which made each new scan narrower than the last
+Change: I changed the order rule from returning repositories first to new repositories first
+Result: The next day Meta astryx 9719 opened and merged in 3 hours and 16 minutes, in a repository I had never touched before
+
+**Beat 7**
+Date: November 3, 2026
+Friction: nanocoder 1929 was claimed by someone else about an hour after my scan found it, while it waited for my confirmation
+Change: I changed the rule so a repository that needs a claim before work starts gets the claim text immediately, without waiting for me
+Result: none
+
+**Beat 8**
+Date: November 7, 2026
+Friction: Sentient 548 sat in review for five days with no signal beyond the open state
+Change: I left it alone under the no nudge rule instead of writing to the maintainer
+Result: The maintainer ran a real engine test himself, approved it with a note saying my real test notes matched what he saw, and merged it that day
 
 ## Limitations and What's Next
 
-What the toolkit as a whole still does not do, and what you would
-build or change next. Write this section last; it will be better
-after the rest.
+The toolkit still cannot finish a contribution without me.
+It can scan, grade, reproduce, write, and check, and it cannot pick what is worth my time, approve words that carry my name, or decide a tradeoff like keeping dex 952 open after another pull request beat it by four minutes.
+Most of its rules exist because a real case forced them, which also means the cases that have not happened yet have no rule.
+Nothing in it tests how a change feels to use, only whether it works.
+What comes next is mostly waiting that I should not shorten.
+Altinn 21606 is still in review as of November 7, with six workflows waiting for approval, and eight external pull requests are still open, including storybook 37092, renovate 47597, grafana 136956, and super-productivity 11434.
+Unit 10 is Demo Day, five minutes, presented from this page, and I would rather spend that time on the astryx and Sentient cases than on the tools themselves.
 
-[The honest limits, and what comes next, in your own sentences.]
+**Tool limits.** One line per featured tool, in the same order as the entries above.
 
-**Tool limits.** One line per featured tool, in the same order as the entries above, naming
-where that tool still stops or what it still gets wrong. A small honest limit is full credit;
-"none really" is not a limit. If a tool genuinely has none you can name, write `none` after
-its label rather than deleting the line.
-
-issue-scout: [where this tool still stops, in plain words, or the word none]
-[tool name]: [where this tool still stops, in plain words, or the word none]
+issue-scout: The scope-feasible row I adopted on 2026-10-21 never went through the eval harness, so the 20 out of 20 belongs to the rubric before it, and the current rubric has no score of its own
+voice guide and voice guard: It reads the command text and does not expand shell variables, so paths held in variables and a body file read from stdin get stopped, and it crashed twice while another session was editing check_voice.py itself
+opensource skill: UI changes carry no screen reader or window resizing coverage, and ordewell 142 needed the maintainer to add those fixes himself, and on this Mac some repositories fail tests on a clean base, astryx had 48, so a base comparison is the only way to judge my own failures
+pr-precheck and ship gate: The manifest runs Node through an npx package pin, and after Homebrew put Node 26 on this machine that command ran 26 instead of 22, and the checks after c1e6c182 did not print a version, so the gate record does not prove which Node ran
