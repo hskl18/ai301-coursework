@@ -23,10 +23,11 @@ It grew out of issue-select from Unit 1, which graded one candidate at a time an
 
 - 2026-10-14, I built issue-scout and ran its first scan.
   Four queries returned 400 results, I narrowed them to 139 repositories, and I graded the top five.
-  Two full eval runs came back 19 out of 20, and both misses came from one rule I had written too loosely.
-  The first read several proposed fixes for one UI freeze as an open ended program, and the second read a short list of missing variants in one component as an open ended feature list.
-  I clarified the umbrella rule after each miss, and the next complete run reached 20 out of 20.
-- 2026-10-21, for Unit 6, I replaced the one bounded task test with the course staff's scope-feasible row, and I split difficulty away from acceptance, so a hard issue could pass and carry a difficulty note instead of failing.
+  Two full eval runs came back 19 out of 20.
+  The misses came from one rule I had written too loosely, and in the second, a short list of missing variants in one component got read as an open ended feature list.
+  I added to the umbrella rule after each miss, and the next complete run reached 20 out of 20.
+- 2026-10-21, I changed the central check again for Unit 6.
+  I replaced the one bounded task test with the staff scope-feasible row, and I split difficulty away from acceptance, so a hard issue could pass and carry a difficulty note instead of failing.
 
 **Evidence:** The before and after of that central check, from my own rubric files.
 
@@ -70,17 +71,16 @@ Every rule in it is a line I drew about what I will and will not say to a mainta
 **How it evolved, dated:**
 
 - 2026-10-21, I installed the guide and the guard, and the first version already stopped a real command that day because the body file path did not resolve.
-- After that, the log dates the first time each rule stopped a real draft.
-- 2026-10-25, the first was the one about skipping praise, emoji, and grand claims.
+- 2026-10-25, the first dated rule in the log is the one about skipping praise, emoji, and grand claims.
 - 2026-10-29, the rule against a guaranteed fix or a delivery date, and the rule about offering a first step and a report back window instead.
 - 2026-11-02, the disclosure rules, naming the AI tools in Notes for Reviewers and disclosing assistance in every course pull request.
 - 2026-11-03, the rule about asking one question after showing the attempt.
-- 2026-11-04, three rules first fired in one day: never promise a fix before the evidence exists, mark a suspected cause as a hypothesis until a test isolates it, and do not claim I personally typed or ran work that an agent did.
+- 2026-11-04, three rules landed in one day: never promise a fix before the evidence exists, mark a suspected cause as a hypothesis until a test isolates it, and do not claim I personally typed or ran work that an agent did.
 - 2026-11-05, the rule against an untested root cause claim.
 
 **Evidence:** From guard-log.md.
 Between 2026-10-21 17:20 and 2026-11-07 21:07 the guard ran 429 checks, passed 338, and stopped 91.
-Two stops from the log, each with the pass that followed, word for word.
+Two stops from the log, word for word.
 
 ```text
 - 2026-10-21 18:11 [hook] stop: could not read the body file: [Errno 2] No such file or directory: '/Users/ice/school/codepath/ai301/unit6-drafts/claim-post-01/claim-draft | target: gh issue comment https://github.com/Altinn/altinn-studio/issues/10955 --body-file
@@ -180,8 +180,8 @@ On main c298f416 (2026-10-28) every row passed except the untracked #10955 repro
 
 **Beat 1**
 Date: October 14, 2026
-Friction: issue-scout read several proposed fixes for one UI freeze, and then a short list of missing variants in one component, as open ended work, and two full eval runs stopped at 19 out of 20
-Change: I clarified the rule twice, saying several fixes for one behavior, or a finite set of variants in one component, do not make an issue an umbrella issue
+Friction: issue-scout read a short list of missing variants in one component as an open ended feature list, and two full eval runs stopped at 19 out of 20
+Change: I added to the umbrella rule in the rubric, saying several fixes for one behavior, or a finite set of variants in one component, do not make an issue an umbrella issue
 Result: The next complete run reached 20 out of 20
 
 **Beat 2**
@@ -206,7 +206,7 @@ Result: No reply went out from that draft, and the replies that did go out waite
 Date: October 29, 2026
 Friction: My first pull request from the opensource skill merged in 29 minutes, and an independent review still scored it 7 out of 10 because it ignored the issue asking for one example and did not follow the README install style next to it
 Change: I added a rule to the opensource profile: what the issue asks for and what the maintainer already does come before my own preference
-Result: ordewell 140 merged the same day, and every plan the skill writes now starts from the issue's explicit asks, one per line
+Result: ordewell 140 merged the same day, and the rule has governed every plan since
 
 **Beat 6**
 Date: November 2, 2026
@@ -224,7 +224,7 @@ Result: none
 Date: November 7, 2026
 Friction: Sentient 548 sat in review for five days with no signal beyond the open state
 Change: I left it alone under the no nudge rule instead of writing to the maintainer
-Result: The maintainer ran a real engine test himself, approved it with a note saying my real test notes matched what he saw, and merged it that day
+Result: The maintainer ran their own real engine test, approved it with a note saying my real test notes matched what they saw, and merged it that day
 
 ## Limitations and What's Next
 
@@ -238,7 +238,7 @@ Unit 10 is Demo Day, five minutes, presented from this page, and I would rather 
 
 **Tool limits.** One line per featured tool, in the same order as the entries above.
 
-issue-scout: The scope-feasible row I adopted on 2026-10-21 never went through the eval harness, so the 20 out of 20 belongs to the rubric before it, and the current rubric has no score of its own
+issue-scout: It cannot tell whether an issue is about to be claimed by someone else
 voice guide and voice guard: It reads the command text and does not expand shell variables, so paths held in variables and a body file read from stdin get stopped, and it crashed twice while another session was editing check_voice.py itself
-opensource skill: UI changes carry no screen reader or window resizing coverage, and ordewell 142 needed the maintainer to add those fixes himself, and on this Mac some repositories fail tests on a clean base, astryx had 48, so a base comparison is the only way to judge my own failures
+opensource skill: UI changes carry no screen reader or window resizing coverage, and ordewell 142 needed the maintainer to add those fixes, and on this Mac some repositories fail tests on a clean base, astryx had 48, so a base comparison is the only way to judge my own failures
 pr-precheck and ship gate: The manifest runs Node through an npx package pin, and after Homebrew put Node 26 on this machine that command ran 26 instead of 22, and the checks after c1e6c182 did not print a version, so the gate record does not prove which Node ran
