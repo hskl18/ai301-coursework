@@ -5,7 +5,7 @@
 ## Featured Tools
 
 I picked these four because each one did live work this term and each one changed after it hit a real case.
-issue-scout picked the issue my whole contribution came from.
+issue-scout graded the issue my whole contribution came from.
 The voice guide and guard touched almost every word I sent upstream.
 The opensource skill took the same workflow outside the course and produced merged pull requests I did not expect when the term started.
 The ship gate is where pr-precheck stopped being an eval tool and ran on a real pull request.
@@ -56,7 +56,7 @@ All 20 calls completed, agreement was 19/20, all five category floors passed, an
 `partial-07` matched 5/5, then the independent complete `full-08` run matched 20/20 with every category perfect and no call errors.
 ```
 
-The live result of that scan is in my contribution story.
+The live result of its direct grading is in my contribution story.
 The scout passed Altinn issue 10955, and that became pull request 21606.
 
 **voice guide and voice guard**
@@ -75,7 +75,7 @@ Every rule in it is a line I drew about what I will and will not say to a mainta
 - 2026-10-29, the rule against a guaranteed fix or a delivery date, and the rule about offering a first step and a report back window instead.
 - 2026-11-02, the disclosure rules, naming the AI tools in Notes for Reviewers and disclosing assistance in every course pull request.
 - 2026-11-03, the rule about asking one question after showing the attempt.
-- 2026-11-04, three rules landed in one day: never promise a fix before the evidence exists, mark a suspected cause as a hypothesis until a test isolates it, and do not claim I personally typed or ran work that an agent did.
+- 2026-11-04, three rules triggered stops in one day: never promise a fix before the evidence exists, mark a suspected cause as a hypothesis until a test isolates it, and do not claim I personally typed or ran work that an agent did.
 - 2026-11-05, the rule against an untested root cause claim.
 
 **Evidence:** From guard-log.md.
@@ -95,9 +95,9 @@ I had it removed, the guard passed five minutes later, and pull request 21606 op
 **opensource skill**
 
 **What it is, and the judgment hole I wrote:** The opensource skill is the course workflow running outside the course.
-It scans repositories, grades issues, and drives the work after I pick one.
+It scans repositories, grades issues, and drives the work after I pick or approve one.
 The agents do the scanning, the reproduction, the code, the tests, and the draft text.
-I pick the issue, I approve every piece of text before it goes out, I sign the CLA when a repository asks for one, and I make the calls when two reasonable options conflict.
+I pick or approve the issue, I approve every piece of text before it goes out, I sign the CLA when a repository asks for one, and I make the calls when two reasonable options conflict.
 Every outgoing text passes the voice guard above, and plans and code pass a Sol review before a pull request opens.
 The judgment part is my profile for it, which repositories and issue shapes it should look for, and the rules I keep adding to that profile after something goes wrong.
 
@@ -143,7 +143,7 @@ It opened on November 3 and merged in 3 hours and 16 minutes.
 
 **What it is, and the judgment hole I wrote:** pr-precheck is my Unit 4 tool.
 It grades a pull request package against the plan it claims to follow and the issue behind that plan, and it answers one question: is this ready to submit.
-The judgment part is its rubric and contract, which I wrote.
+The judgment part is its rubric, which I wrote.
 The ship gate is what pr-precheck turned into on live work.
 I wrote a manifest, ship-manifest.md, that lists the four checks from the Altinn frontend CI, unit tests, typecheck, ESLint with Prettier, and spell quick, with the workflow file each one came from.
 The gate runs those four project checks and the six pr-precheck checks before a pull request is allowed to open.
@@ -222,7 +222,7 @@ Result: none
 
 **Beat 8**
 Date: November 7, 2026
-Friction: Sentient 548 sat in review for five days with no signal beyond the open state
+Friction: Sentient 548 sat in review for five days with no maintainer response
 Change: I left it alone under the no nudge rule instead of writing to the maintainer
 Result: The maintainer ran their own real engine test, approved it with a note saying my real test notes matched what they saw, and merged it that day
 
@@ -241,4 +241,4 @@ Unit 10 is Demo Day, five minutes, presented from this page, and I would rather 
 issue-scout: It cannot tell whether an issue is about to be claimed by someone else
 voice guide and voice guard: It reads the command text and does not expand shell variables, so paths held in variables and a body file read from stdin get stopped, and it crashed twice while another session was editing check_voice.py itself
 opensource skill: UI changes carry no screen reader or window resizing coverage, and ordewell 142 needed the maintainer to add those fixes, and on this Mac some repositories fail tests on a clean base, astryx had 48, so a base comparison is the only way to judge my own failures
-pr-precheck and ship gate: The manifest runs Node through an npx package pin, and after Homebrew put Node 26 on this machine that command ran 26 instead of 22, and the checks after c1e6c182 did not print a version, so the gate record does not prove which Node ran
+pr-precheck and ship gate: The manifest runs Node through an npx package pin, and after Homebrew put Node 26 on this machine that command ran 26 instead of 22, and the October 28 follow-up checks did not print a version, so the gate record does not prove which Node ran
