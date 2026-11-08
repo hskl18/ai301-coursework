@@ -92,6 +92,14 @@ Two stops from the log, word for word.
 The October 28 stop was an emoji attribution line in my pull request body.
 I had it removed, the guard passed five minutes later, and pull request 21606 opened.
 
+```text
+Two rules in ~/.claude/voice-guard/voice-guide.md that none of my Unit 2-4 guides in tools/ has
+#### Rule: Offer a first step and a report-back window
+Name the reported behavior, the first check I intend to run, and a realistic window for reporting results or a blocker, even if I cannot reproduce it.
+#### Rule: Ask one question after showing the attempt
+Read the relevant documentation and thread, then include the command or steps I tried, the observed result, and one question the maintainer can answer.
+```
+
 **opensource skill**
 
 **What it is, and the judgment hole I wrote:** The opensource skill is the course workflow running outside the course.
@@ -116,6 +124,12 @@ The judgment part is my profile for it, which repositories and issue shapes it s
 **Evidence:** My ledger as of 2026-11-07, after 19 scans from 2026-10-29 to 2026-11-05.
 The ledger has 123 rows: rejected 71, accepted 23, dropped 7, closed 2, waiting 2, pull request open 9, merged 9.
 The nine merged pull requests span five repositories and total plus 2349 and minus 91 lines.
+
+```text
+From ~/.claude/skills/opensource/profile.md, the repo_queries change
+`ts-popular` and `py-popular` trace to "bounded bug fixes ... in TypeScript, Python" and to the user's ask on 2026-10-30 to prefer repos with more stars.
+They look for `help wanted` because popular repos often keep `good first issue` for people working without AI (beets, blockly and Qiskit ban AI on that label).
+```
 
 | Pull request | Change | Opened (UTC) | Merged (UTC) |
 |---|---|---|---|
@@ -165,6 +179,15 @@ The gate runs those four project checks and the six pr-precheck checks before a 
 
 The CI job's `yarn strict-null-checks` is not listed because tsconfig-strict.json only includes `libs`, which this change does not touch.
 On main c298f416 (2026-10-28) every row passed except the untracked #10955 reproduction test, which failed by design and was removed from the checkout after its after-fix run.
+```
+
+```text
+From the real gate run, unit7-drafts/gate-run-01/stdout.txt, started 2026-10-28 19:05 PDT, exit 0
+ship-gate: PASS. fix/10955-keep-selected-component passed your manifest's checks and your pr-precheck. Open the PR through Claude Code within 30 minutes, without changing anything, and the ship-gate lets it through without running again.
+  repo check Designer frontend unit tests: ok (114s)
+  repo check Typecheck: ok (5s)
+  repo check ESLint and Prettier: ok (85s)
+  repo check Spell check of changed files: ok (2s)
 ```
 
 ## Inventory
