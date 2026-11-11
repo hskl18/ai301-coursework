@@ -100,6 +100,30 @@ Name the reported behavior, the first check I intend to run, and a realistic win
 Read the relevant documentation and thread, then include the command or steps I tried, the observed result, and one question the maintainer can answer.
 ```
 
+```text
+What each dated rule above stopped the first time: time and target from guard-log.md, draft line as the guard quoted it
+2026-10-25 08:41 | gh pr create --base preview | Skip praise, emoji, grand claims | "🤖 Generated with [Claude Code](https://claude.com/claude-code)"
+2026-10-29 00:27 | shopnex-ai/shopnex#47 claim draft | A guaranteed fix, delivery date, or request to reserve an issue | "... and I'll open a PR for it today."
+2026-10-29 00:27 | same draft, next version | Offer a first step and a report-back window | "... and the PR will link back here."
+2026-11-02 22:46 | PR bodies moving CLAUDE.md into AGENTS.md in my own repos, not course PRs | Disclose assistance in every course PR | "The whole draft: it has no Notes for Reviewers section and never names the AI tools used or what they helped with ..."
+2026-11-03 19:05 | CherryHQ/cherry-studio claim draft | Ask one question after showing the attempt | "Is the main-process, memory-only queue still the direction you want, and should I wait for #22093 to settle what happens after `error` and `aborted`?"
+2026-11-04 01:52 | doobidoo/mcp-memory-service#1852 claim draft | Never promise a fix or a deadline before the evidence exists | "I'll report back here within two days, with the PR or with whatever blocks it."
+2026-11-04 12:12 | grafana reply to a reviewer | Trace the code, but mark a suspected cause as a hypothesis | "because `maxTextWidth` is too narrow once the browser adds letter spacing that `calculateFontSize` does not measure."
+2026-11-04 22:14 | PR body for my own repo boring-agent-memory | Do not claim I personally typed, ran, reviewed, or rewrote work that an agent did for me | "I ran the README's commands from a wheel in a clean environment outside the repository, including the config, stdio and Python examples."
+2026-11-05 22:49 | super-productivity#11434 PR comment | An untested root-cause claim | "This run's merge ref was built at 08:06 UTC that day, so it ran the old test. I haven't rerun it here."
+```
+
+```text
+Two edits to voice-guide.md and the stops before them, from guard-log.md and the guide
+- 2026-10-29 12:42 [hook] stop: rule broken: "A guaranteed fix, delivery date, or request to reserve an issue." | target: gh issue comment 536 -R  (draft line: "/assign")
+  Added 2026-10-29 16:37: Exception: a comment that is nothing but one repository command, a single line of slash-command syntax such as `/assign` or a CLA bot's exact signature sentence, is not a request to reserve, and none of the rules for writing a claim apply to it
+- 2026-10-29 16:47 [manual] pass | target: .../scratchpad/vg/assign.md
+- 2026-10-29 16:48 [manual] stop: rule broken: "A guaranteed fix, delivery date, or request to reserve an issue." | target: .../scratchpad/vg/prose.md
+- 2026-11-05 16:19 [hook] stop: rule broken: "In Notes for Reviewers, name the AI tools and what they actually helped with: investigation, code, tests, checks, or writing." | target: gh pr create -R ruvnet/ruflo
+  Added 2026-11-05 17:20: This rule covers only PRs made for the CodePath AI301 course, such as Altinn/altinn-studio.
+- 2026-11-05 17:23 [hook] pass | target: gh pr create -R ruvnet/ruflo
+```
+
 **opensource skill**
 
 **What it is, and the judgment hole I wrote:** The opensource skill is the course workflow running outside the course.
